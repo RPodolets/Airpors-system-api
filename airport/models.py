@@ -23,9 +23,7 @@ class Airplane(models.Model):
     rows = models.IntegerField()
     seats_in_row = models.IntegerField()
     type = models.ForeignKey(
-        AirplaneType,
-        on_delete=models.CASCADE,
-        related_name="airplanes"
+        AirplaneType, on_delete=models.CASCADE, related_name="airplanes"
     )
 
     def __str__(self):
@@ -85,9 +83,7 @@ class Flight(models.Model):
 class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(
-        get_user_model(),
-        on_delete=models.CASCADE,
-        related_name="orders"
+        get_user_model(), on_delete=models.CASCADE, related_name="orders"
     )
 
 
@@ -116,9 +112,9 @@ class Ticket(models.Model):
                 raise error_to_raise(
                     {
                         ticket_attr_name: f"{ticket_attr_name} "
-                                          f"number must be in available range: "
-                                          f"(1, {flight_attr_name}): "
-                                          f"(1, {count_attrs})"
+                        f"number must be in available range: "
+                        f"(1, {flight_attr_name}): "
+                        f"(1, {count_attrs})"
                     }
                 )
 
@@ -131,11 +127,11 @@ class Ticket(models.Model):
         )
 
     def save(
-            self,
-            force_insert=False,
-            force_update=False,
-            using=None,
-            update_fields=None,
+        self,
+        force_insert=False,
+        force_update=False,
+        using=None,
+        update_fields=None,
     ):
         self.full_clean()
         return super(Ticket, self).save(

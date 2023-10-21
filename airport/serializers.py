@@ -111,7 +111,7 @@ class FlightDetailSerializer(FlightSerializer):
             "departure_time",
             "arrival_time",
             "crew",
-            "taken_places"
+            "taken_places",
         )
 
 
@@ -145,7 +145,7 @@ class TicketSerializer(serializers.ModelSerializer):
 
 
 class TicketListSerializer(TicketSerializer):
-    movie_session = FlightSerializer(many=False, read_only=True)
+    flight = FlightSerializer(many=False, read_only=True)
 
 
 class OrderSerializer(serializers.ModelSerializer):
@@ -154,6 +154,16 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ("id", "tickets", "created_at")
+
+    def validate(self, data):
+        tickets_data = data.get("tickets", [])
+        ticket_set = set()
+        for ticket_data in tickets_data:
+            ticket = (ticket_data.get("row"), ticket_data.get("seat"), ticket_data.get("flight"))
+            if ticket in ticket_set:
+                raise ValidationError("Duplicate ticket found in input data.")
+            ticket_set.add(ticket)
+        return data
 
     def create(self, validated_data):
         with transaction.atomic():
