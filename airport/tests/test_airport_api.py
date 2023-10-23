@@ -191,8 +191,8 @@ class AdminAirportApiTests(TestCase):
         destination = sample_airport(name="Airport 2")
 
         payload = {
-            "source": source,
-            "destination": destination,
+            "source": source.id,
+            "destination": destination.id,
             "distance": 200,
         }
 
