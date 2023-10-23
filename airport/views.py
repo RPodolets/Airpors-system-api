@@ -39,9 +39,7 @@ def _params_to_ints(qs):
     return [int(str_id) for str_id in qs.split(",")]
 
 
-class AirportViewSet(
-    viewsets.ModelViewSet
-):
+class AirportViewSet(viewsets.ModelViewSet):
     queryset = Airport.objects.all()
     serializer_class = AirportSerializer
     permission_classes = (IsAdminOrIfAuthenticatedReadOnly,)
@@ -103,7 +101,7 @@ class RouteViewSet(viewsets.ModelViewSet):
                 "destination",
                 type={"type": "list", "items": {"type": "number"}},
                 description="Filter by destination id (ex. ?actors=2,5)",
-            )
+            ),
         ]
     )
     def list(self, request, *args, **kwargs):
@@ -148,7 +146,7 @@ class AirplaneViewSet(viewsets.ModelViewSet):
                 "types",
                 type={"type": "list", "items": {"type": "number"}},
                 description="Filter by airplane_type id "
-                            "(ex. ?airplane_types=1,2)",
+                "(ex. ?airplane_types=1,2)",
             ),
         ]
     )

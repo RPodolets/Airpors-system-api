@@ -159,7 +159,11 @@ class OrderSerializer(serializers.ModelSerializer):
         tickets_data = data.get("tickets", [])
         ticket_set = set()
         for ticket_data in tickets_data:
-            ticket = (ticket_data.get("row"), ticket_data.get("seat"), ticket_data.get("flight"))
+            ticket = (
+                ticket_data.get("row"),
+                ticket_data.get("seat"),
+                ticket_data.get("flight"),
+            )
             if ticket in ticket_set:
                 raise ValidationError("Duplicate ticket found in input data.")
             ticket_set.add(ticket)
