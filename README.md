@@ -13,22 +13,32 @@ API for airport service, that developed with Django REST Framework.
 
 ## Installation
 ### Windows
-```commandline
+```bash
 git clone https://github.com/RPodolets/Airport-system-api.git
 cd airport-system-api
 python3 -m venv venv
 venv/bin/activate
 pip install -r requirements.txt
+set DB_HOST=<your_host>
+set DB_NAME=<your_db_name>
+set DB_USER=<your_db_user>
+set DB_PASSWORD=<your_db_password>
+set SECRET_KEY=<your_secret_key>
 python manage.py migrate
 python manage.py runserver
 ```
 ### Mac / Linux
-```commandline
+```bash
 git clone https://github.com/RPodolets/Airport-system-api.git
 cd airport-system-api
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+export DB_HOST=<your_host>
+export DB_NAME=<your_db_name>
+export DB_USER=<your_db_user>
+export DB_PASSWORD=<your_db_password>
+export SECRET_KEY=<your_secret_key>
 python manage.py migrate
 python manage.py runserver
 ```
